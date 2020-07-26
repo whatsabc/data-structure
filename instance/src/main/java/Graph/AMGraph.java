@@ -17,22 +17,11 @@ public class AMGraph {
     int[] vex;//点的集合
     int[][] arc;
 
-    /*
-     *
-     */
     boolean[] isVisited;//用于判断当前点是否被访问过
 
     public AMGraph(int vexNum, int arcNum) {
         this.vexNum = vexNum;
         this.arcNum = arcNum;
-    }
-
-    public void setVex(int[] vex) {
-        this.vex = vex;
-    }
-
-    public void setArc(int[][] arc) {
-        this.arc = arc;
     }
 
     /**
