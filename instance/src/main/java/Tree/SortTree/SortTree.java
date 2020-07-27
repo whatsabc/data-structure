@@ -130,7 +130,7 @@ public class SortTree {
      */
     public void BFS(){
 
-        Deque<TreeNode> deque=new ArrayDeque<>();
+        Deque<TreeNode> deque=new ArrayDeque<>();//
         if(root==null){
             return;
         }
@@ -138,13 +138,74 @@ public class SortTree {
         deque.add(root);
         while(!deque.isEmpty()){
             TreeNode treeNode=deque.remove();
-            System.out.print("-->"+treeNode.val);
+            System.out.print("-->"+treeNode.val);//
             if(treeNode.left!=null){
                 deque.add(treeNode.left);
             }
             if(treeNode.right!=null){
                 deque.add(treeNode.right);
             }
+        }
+    }
+
+
+    /**
+     * 二叉排序树的删除
+     * 1.只有一个节点：如果要删除的节点A只有一个子节点，就直接将A的子节点连到A的父节点，并将A删除；
+     * 2.如果A有两个子节点，我们就以该节点右子树的最小节点取代A；
+     * ====疑问点，未解决====
+     * 注意：此函数不可用，由于Java的参数是按值传递的，因此，我们只能修改treeNode=的复制值，修改不了原root
+     * @param treeNode
+     * @param val
+     */
+    public void DeleteBSTNode(TreeNode treeNode,int val){
+
+        TreeNode p=treeNode;
+        TreeNode parent=null;
+        if(p==null){
+            return;
+        }
+        else if(p.val==val){
+            //是一个叶子节点；
+            if(p.left==null&&p.right==null){
+                treeNode=null;
+            }
+            //只有左节点；
+            else if(p.right==null&&p.left!=null){
+                treeNode=p.left;
+            }
+            //只有右节点；
+            else if(p.right!=null&&p.left==null){
+                treeNode=p.right;
+            }
+            //两个节点均存在
+            else{
+                TreeNode s=p.right;
+                //如果p的右子树s没有左子树
+                if(s.left==null){
+                    s.left=p.left;
+                }
+                //如果p的右子树s有左子树
+                else{
+                    //在左子树找到最小的节点；
+                    while(s.left!=null){
+                        parent=s;//记录下这个最小的节点；
+                        s=s.left;
+                    }
+                    p.left=s.right;
+                    s.left=p.left;
+                    s.right=p.right;
+                }
+                treeNode=s;
+            }
+        }
+        //向右找
+        else if(val>p.val){
+            DeleteBSTNode(p.right,val);
+        }
+        //向左找
+        else if(val<p.val){
+            DeleteBSTNode(p.left,val);
         }
     }
 }

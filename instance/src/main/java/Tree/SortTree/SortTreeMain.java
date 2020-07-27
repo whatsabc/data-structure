@@ -21,5 +21,7 @@ public class SortTreeMain {
 
         System.out.println("\n最大值为："+sortTree.SearchMax());
         System.out.println("\n最小值为："+sortTree.SearchMin());
+
+        //sortTree.DeleteBSTNode(sortTree.root,8);
     }
 }
