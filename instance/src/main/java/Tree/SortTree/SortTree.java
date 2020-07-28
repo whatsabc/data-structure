@@ -3,9 +3,8 @@ package Tree.SortTree;
 /**
  * @author Jianshu
  * @time 20200727
- * 二叉排序树
+ * 二叉排序树（二叉查找树，二叉搜索树）
  */
-
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -14,7 +13,7 @@ public class SortTree {
     TreeNode root;
 
     /**
-     * 一次插入一个元素构建二叉树
+     * 在一个二叉树插入一个元素（迭代实现）
      * @param val
      */
     public void InsertBST(int val){
@@ -47,6 +46,23 @@ public class SortTree {
     }
 
     /**
+     * 在一个二叉树插入一个元素（递归实现）
+     * ==来自leetcode==
+     * @param root
+     * @param val
+     * @return
+     */
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        if (root == null) return new TreeNode(val);
+
+        // insert into the right subtree
+        if (val > root.val) root.right = insertIntoBST(root.right, val);
+            // insert into the left subtree
+        else root.left = insertIntoBST(root.left, val);
+        return root;
+    }
+
+    /**
      * 递归找到二叉树中的某个值
      * @param root
      * @param val
@@ -68,7 +84,7 @@ public class SortTree {
     }
 
     /**
-     *
+     * 查找最大值
      */
     public int SearchMax(){
         TreeNode treeNode=root;
@@ -79,7 +95,7 @@ public class SortTree {
     }
 
     /**
-     *
+     * 查找最小值
      */
     public int SearchMin(){
         TreeNode treeNode=root;
@@ -207,5 +223,53 @@ public class SortTree {
         else if(val<p.val){
             DeleteBSTNode(p.left,val);
         }
+    }
+
+    public TreeNode deleteNode(TreeNode root, int key){
+        if(root==null)
+            return null;
+        // delete from the right subtree
+        if(key>root.val)
+            root.right=deleteNode(root.right,key);
+            // delete from the left subtree
+        else if(key<root.val)
+            root.left=deleteNode(root.left, key);
+            // delete the current node
+        else{
+            // the node is a leaf
+            if(root.left==null&&root.right==null)
+                root=null;
+                // the node is not a leaf and has a right child
+            else if(root.right!=null){
+                root.val=successor(root);
+                root.right=deleteNode(root.right,root.val);
+            }
+            // the node is not a leaf, has no right child, and has a left child
+            else{
+                root.val=predecessor(root);
+                root.left=deleteNode(root.left,root.val);
+            }
+        }
+        return root;
+    }
+
+    /*
+    One step right and then always left
+    */
+    public int successor(TreeNode root){
+        root=root.right;
+        while(root.left!=null)
+            root=root.left;
+        return root.val;
+    }
+
+    /*
+    One step left and then always right
+    */
+    public int predecessor(TreeNode root){
+        root=root.left;
+        while(root.right!=null)
+            root=root.right;
+        return root.val;
     }
 }

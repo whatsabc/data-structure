@@ -3,6 +3,7 @@ package Tree.SortTree;
 /**
  * @author Jianshu
  * @time 20200727
+ * @since
  */
 public class SortTreeMain {
     public static void main(String[] args){
@@ -23,5 +24,8 @@ public class SortTreeMain {
         System.out.println("\n最小值为："+sortTree.SearchMin());
 
         //sortTree.DeleteBSTNode(sortTree.root,8);
+        sortTree.deleteNode(sortTree.root,8);
+        System.out.println("\n广度优先遍历：");
+        sortTree.BFS();
     }
 }
