@@ -9,12 +9,12 @@ import java.util.*;
 
 public class AMGraph {
 
-    final int unReach=65535;
+    final int unReach=65535;//设置两个节点点不能到达时标志的距离
     int vexNum;//点的数量
     int arcNum;//边的数量
 
     int[] vex;//点的集合
-    int[][] arc;
+    int[][] arc;//边的关系
 
     boolean[] isVisited;//用于判断当前点是否被访问过
 
@@ -213,6 +213,35 @@ public class AMGraph {
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * 最短路径算法
+     * 弗洛伊德算法，1978年图灵奖获得者、斯坦福大学计算机科学系教授罗伯特·弗洛伊德命名
+     */
+    public void shortestPathFloyd(){
+
+        int[][] floydArc=arc;
+        //弗洛伊德算法的特殊性要求保持节点本身到本身的距离为0
+        for(int i=0;i<vexNum;i++){
+            floydArc[i][i]=0;
+        }
+
+        /*
+         * 当之无愧的算法之美
+         */
+        for(int k=0;k<vexNum;k++)//一共vexNum个节点
+            for(int i=0;i<vexNum;i++)
+                for(int j=0;j<vexNum;j++)
+                    if(floydArc[i][j]>floydArc[i][k]+floydArc[k][j])//经过该中转站的两个节点小于它们之前的距离，更新
+                        floydArc[i][j]=floydArc[i][k]+floydArc[k][j];
+
+        for(int i=0;i<vexNum;i++){
+            for(int j=0;j<vexNum;j++){
+                System.out.print(floydArc[i][j]+" ");
+            }
+            System.out.print("\n");
         }
     }
 }

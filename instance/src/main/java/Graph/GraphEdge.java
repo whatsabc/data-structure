@@ -41,6 +41,9 @@ public class GraphEdge implements Comparable<GraphEdge>{
         this.lowCost = lowCost;
     }
 
+    /*
+     * 重写了比较方法，直接比较lowCost
+     */
     @Override
     public int compareTo(GraphEdge graphEdge){
         return this.getLowCost().compareTo((graphEdge.getLowCost()));

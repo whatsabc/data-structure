@@ -21,8 +21,10 @@ public class Main {
 
         amGraph.DFS();
         amGraph.BFS();
-        amGraph.shortestPathDIJ(0,5);
+        amGraph.shortestPathDIJ(0,1);
         System.out.println("\n最小生成树为[Kruskal算法]");
         amGraph.miniSpanTreeKruskal();
+        System.out.println("弗洛伊德算法求出最短路径矩阵：");
+        amGraph.shortestPathFloyd();
     }
 }
