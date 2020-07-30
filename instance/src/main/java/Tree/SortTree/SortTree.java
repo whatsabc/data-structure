@@ -26,7 +26,7 @@ public class SortTree {
         }
 
         //如果在排序二叉树里面找到了这个值，跳过
-        if(SearchBST(root,val)!=null){
+        if(searchBST(root,val)!=null){
             return;
         }
 
@@ -68,15 +68,15 @@ public class SortTree {
      * @param val
      * @return
      */
-    public TreeNode SearchBST(TreeNode root, int val){
+    public TreeNode searchBST(TreeNode root, int val){
         if(root==null){
             return null;
         }
         else if(val>root.val){
-            return SearchBST(root.right,val);
+            return searchBST(root.right,val);
         }
         else if(val<root.val){
-            return SearchBST(root.left,val);
+            return searchBST(root.left,val);
         }
         else{
             return root;
@@ -86,7 +86,7 @@ public class SortTree {
     /**
      * 查找最大值
      */
-    public int SearchMax(){
+    public int searchMax(){
         TreeNode treeNode=root;
         while(treeNode.right!=null){
             treeNode=treeNode.right;
@@ -97,7 +97,7 @@ public class SortTree {
     /**
      * 查找最小值
      */
-    public int SearchMin(){
+    public int searchMin(){
         TreeNode treeNode=root;
         while(treeNode.left!=null){
             treeNode=treeNode.left;
@@ -109,11 +109,11 @@ public class SortTree {
      * 递归进行先序遍历
      * @param root
      */
-    public void PreOrderTraverse(TreeNode root){
+    public void preOrderTraverse(TreeNode root){
         if(root!=null){
             System.out.print("-->"+root.val);
-            PreOrderTraverse(root.left);
-            PreOrderTraverse(root.right);
+            preOrderTraverse(root.left);
+            preOrderTraverse(root.right);
         }
     }
 
@@ -121,11 +121,11 @@ public class SortTree {
      * 递归进行中序遍历
      * @param root
      */
-    public void MidOrderTraverse(TreeNode root){
+    public void midOrderTraverse(TreeNode root){
         if(root!=null){
-            MidOrderTraverse(root.left);
+            midOrderTraverse(root.left);
             System.out.print("-->"+root.val);
-            MidOrderTraverse(root.right);
+            midOrderTraverse(root.right);
         }
     }
 
@@ -133,10 +133,10 @@ public class SortTree {
      * 递归进行后序遍历
      * @param root
      */
-    public void PostOrderTraverse(TreeNode root){
+    public void postOrderTraverse(TreeNode root){
         if(root!=null){
-            PostOrderTraverse(root.left);
-            PostOrderTraverse(root.right);
+            postOrderTraverse(root.left);
+            postOrderTraverse(root.right);
             System.out.print("-->"+root.val);
         }
     }
@@ -174,32 +174,30 @@ public class SortTree {
      * @param treeNode
      * @param val
      */
-    public void DeleteBSTNode(TreeNode treeNode,int val){
-
-        TreeNode p=treeNode;
+    public void deleteBSTNode(TreeNode treeNode, int val){
         TreeNode parent=null;
-        if(p==null){
+        if(treeNode==null){
             return;
         }
-        else if(p.val==val){
+        else if(treeNode.val==val){
             //是一个叶子节点；
-            if(p.left==null&&p.right==null){
+            if(treeNode.left==null&&treeNode.right==null){
                 treeNode=null;
             }
             //只有左节点；
-            else if(p.right==null&&p.left!=null){
-                treeNode=p.left;
+            else if(treeNode.right==null&&treeNode.left!=null){
+                treeNode=treeNode.left;
             }
             //只有右节点；
-            else if(p.right!=null&&p.left==null){
-                treeNode=p.right;
+            else if(treeNode.right!=null&&treeNode.left==null){
+                treeNode=treeNode.right;
             }
             //两个节点均存在
             else{
-                TreeNode s=p.right;
+                TreeNode s=treeNode.right;
                 //如果p的右子树s没有左子树
                 if(s.left==null){
-                    s.left=p.left;
+                    s.left=treeNode.left;
                 }
                 //如果p的右子树s有左子树
                 else{
@@ -208,43 +206,49 @@ public class SortTree {
                         parent=s;//记录下这个最小的节点；
                         s=s.left;
                     }
-                    p.left=s.right;
-                    s.left=p.left;
-                    s.right=p.right;
+                    treeNode.left=s.right;
+                    s.left=treeNode.left;
+                    s.right=treeNode.right;
                 }
                 treeNode=s;
             }
         }
         //向右找
-        else if(val>p.val){
-            DeleteBSTNode(p.right,val);
+        else if(val>treeNode.val){
+            deleteBSTNode(treeNode.right,val);
         }
         //向左找
-        else if(val<p.val){
-            DeleteBSTNode(p.left,val);
+        else if(val<treeNode.val){
+            deleteBSTNode(treeNode.left,val);
         }
     }
 
+    /**
+     * 二叉树的删除（该代码主要来自LeetCode）
+     * @param root
+     * @param key
+     * @return
+     */
     public TreeNode deleteNode(TreeNode root, int key){
         if(root==null)
             return null;
-        // delete from the right subtree
+        //向右边找
         if(key>root.val)
             root.right=deleteNode(root.right,key);
-            // delete from the left subtree
+        //向左边找
         else if(key<root.val)
             root.left=deleteNode(root.left, key);
-            // delete the current node
+        //找到了要删除的节点
         else{
-            // the node is a leaf
+            //节点是一个叶子节点
             if(root.left==null&&root.right==null)
                 root=null;
-                // the node is not a leaf and has a right child
+            //不是叶子节点并且有一个右孩子
             else if(root.right!=null){
                 root.val=successor(root);
                 root.right=deleteNode(root.right,root.val);
             }
-            // the node is not a leaf, has no right child, and has a left child
+            //不是叶子节点，没有右孩子，但是有一个左孩子
             else{
                 root.val=predecessor(root);
                 root.left=deleteNode(root.left,root.val);
@@ -253,9 +257,11 @@ public class SortTree {
         return root;
     }
 
-    /*
-    One step right and then always left
-    */
+    /**
+     * 找到该节点右节点开始的子树的最小值
+     * @param root
+     * @return
+     */
     public int successor(TreeNode root){
         root=root.right;
         while(root.left!=null)
@@ -263,9 +269,11 @@ public class SortTree {
         return root.val;
     }
 
-    /*
-    One step left and then always right
-    */
+    /**
+     * 找到该节点左节点开始的子树的最大值
+     * @param root
+     * @return
+     */
     public int predecessor(TreeNode root){
         root=root.left;
         while(root.right!=null)

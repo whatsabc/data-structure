@@ -56,11 +56,11 @@ public class Tree {
      * 递归进行先序遍历
      * @param root
      */
-    public void PreOrderTraverse(TreeNode root){
+    public void preOrderTraverse(TreeNode root){
         if(root!=null){
             System.out.print("-->"+root.val);
-            PreOrderTraverse(root.left);
-            PreOrderTraverse(root.right);
+            preOrderTraverse(root.left);
+            preOrderTraverse(root.right);
         }
     }
 
@@ -68,11 +68,11 @@ public class Tree {
      * 递归进行中序遍历
      * @param root
      */
-    public void MidOrderTraverse(TreeNode root){
+    public void midOrderTraverse(TreeNode root){
         if(root!=null){
-            MidOrderTraverse(root.left);
+            midOrderTraverse(root.left);
             System.out.print("-->"+root.val);
-            MidOrderTraverse(root.right);
+            midOrderTraverse(root.right);
         }
     }
 
@@ -80,10 +80,10 @@ public class Tree {
      * 递归进行后序遍历
      * @param root
      */
-    public void PostOrderTraverse(TreeNode root){
+    public void postOrderTraverse(TreeNode root){
         if(root!=null){
-            PostOrderTraverse(root.left);
-            PostOrderTraverse(root.right);
+            postOrderTraverse(root.left);
+            postOrderTraverse(root.right);
             System.out.print("-->"+root.val);
         }
     }

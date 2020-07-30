@@ -12,11 +12,11 @@ public class TreeMain {
         tree.stringToTreeNode(data);
 
         System.out.println("\n先序遍历：");
-        tree.PreOrderTraverse(tree.root);
+        tree.preOrderTraverse(tree.root);
         System.out.println("\n中序遍历：");
-        tree.MidOrderTraverse(tree.root);
+        tree.midOrderTraverse(tree.root);
         System.out.println("\n后序遍历：");
-        tree.PostOrderTraverse(tree.root);
+        tree.postOrderTraverse(tree.root);
         System.out.println("\n广度优先遍历：");
         tree.BFS();
     }

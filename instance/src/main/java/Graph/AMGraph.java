@@ -5,8 +5,7 @@ package Graph;
  * @time 20200726
  * 图的深度优先遍历，广度优先遍历和迪杰斯特拉最短路径算法
  */
-import java.util.ArrayDeque;
-import java.util.ArrayList;
+import java.util.*;
 
 public class AMGraph {
 
@@ -18,6 +17,8 @@ public class AMGraph {
     int[][] arc;
 
     boolean[] isVisited;//用于判断当前点是否被访问过
+
+    List<GraphEdge> graphEdgeList;
 
     public AMGraph(int vexNum, int arcNum) {
         this.vexNum = vexNum;
@@ -31,6 +32,8 @@ public class AMGraph {
      */
     public void createUDN(int[] vexData,int[] arcData){
 
+        graphEdgeList=new ArrayList<>();//初始化最小生成树需要数组
+
         vex=vexData;//点初始化
         arc=new int[vexNum][vexNum];
         for(int i=0;i<vexNum;i++){
@@ -43,6 +46,9 @@ public class AMGraph {
         int arcA,arcB,w;
         for(int i=0;i<arcNum;i++){
             arcA=arcData[ptr];arcB=arcData[ptr+1];w=arcData[ptr+2];
+            //初始化所需要的数组
+            GraphEdge graphEdge=new GraphEdge(arcA,arcB,w);
+            graphEdgeList.add(graphEdge);
             arc[arcA][arcB]=w;
             arc[arcB][arcA]=arc[arcA][arcB];//无向图
 
@@ -113,7 +119,7 @@ public class AMGraph {
      * @param start 起点，从0开始
      * @param end 终点，从0开始
      */
-    public void ShortestPath_DIJ(int start,int end){
+    public void shortestPathDIJ(int start, int end){
 
         boolean[] isVisited=new boolean[vexNum];//用来标记是否访问过
         int[] d=new int[vexNum];//保存最短路径长度，当前所找到的从起始点到其它每个顶点vi的长度
@@ -161,7 +167,7 @@ public class AMGraph {
     }
 
     /**
-     *
+     * 打印迪杰斯特拉最短路径
      * @param path
      * @param end
      */
@@ -175,6 +181,38 @@ public class AMGraph {
         System.out.print("最短路径是：");
         for(Integer i:p){
             System.out.print(" --> "+i);
+        }
+    }
+
+    /**
+     * 最小生成树
+     * 实现原理就是[并查集]
+     */
+    public void miniSpanTreeKruskal(){
+
+        //初始化并查集数组，每个节点的根节点初始化为自己
+        int[] vexSet=new int[vexNum];
+        for(int i=0;i<vexNum;i++){
+            vexSet[i]=i;
+        }
+
+        Collections.sort(graphEdgeList);
+        int v1,v2;
+        for(int i=0;i<arcNum;i++){
+            v1=graphEdgeList.get(i).head;
+            v2=graphEdgeList.get(i).tail;
+            v1=vexSet[v1];
+            v2=vexSet[v2];
+            //如果v1和v2的根节点不同，说明没有构成环，因为如果v1 v2根节点相同，v1-->v2又是一条边，一定为环
+            if(v1!=v2){
+                System.out.println(graphEdgeList.get(i).head+"---"+
+                        graphEdgeList.get(i).lowCost+"--->"+graphEdgeList.get(i).tail);
+                for(int j=0;j<vexNum;j++){
+                    if(vexSet[j]==v2){
+                        vexSet[j]=v1;//将v2的根节点修改为v1的根节点
+                    }
+                }
+            }
         }
     }
 }

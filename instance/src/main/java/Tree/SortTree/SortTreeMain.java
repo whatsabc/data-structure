@@ -16,15 +16,15 @@ public class SortTreeMain {
         }
 
         System.out.println("\n中序遍历：");
-        sortTree.MidOrderTraverse(sortTree.root);
+        sortTree.midOrderTraverse(sortTree.root);
         System.out.println("\n广度优先遍历：");
         sortTree.BFS();
 
-        System.out.println("\n最大值为："+sortTree.SearchMax());
-        System.out.println("\n最小值为："+sortTree.SearchMin());
+        System.out.println("\n最大值为："+sortTree.searchMax());
+        System.out.println("\n最小值为："+sortTree.searchMin());
 
-        //sortTree.DeleteBSTNode(sortTree.root,8);
-        sortTree.deleteNode(sortTree.root,8);
+        sortTree.deleteBSTNode(sortTree.root,8);
+        //sortTree.deleteNode(sortTree.root,8);
         System.out.println("\n广度优先遍历：");
         sortTree.BFS();
     }
