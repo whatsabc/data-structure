@@ -163,15 +163,15 @@ public class AMGraph {
             }
         }
         System.out.println("点"+start+"到"+end+"的最短距离是："+d[end]);
-        printPath(path,end);
+        printDIJPath(path,end);
     }
 
     /**
      * 打印迪杰斯特拉最短路径
-     * @param path
-     * @param end
+     * @param path 路径数据
+     * @param end 末尾节点
      */
-    public void printPath(int[] path,int end){
+    public void printDIJPath(int[] path, int end){
         ArrayList<Integer> p=new ArrayList<>();
         int temp=path[end];
         while(temp!=-1){
@@ -237,6 +237,14 @@ public class AMGraph {
                     if(floydArc[i][j]>floydArc[i][k]+floydArc[k][j])//经过该中转站的两个节点小于它们之前的距离，更新
                         floydArc[i][j]=floydArc[i][k]+floydArc[k][j];
 
+        printFloydPath(floydArc);
+    }
+
+    /**
+     * 打印弗洛伊德算法生成的路径矩阵
+     * @param floydArc 输入的生成矩阵
+     */
+    public void printFloydPath(int[][] floydArc){
         for(int i=0;i<vexNum;i++){
             for(int j=0;j<vexNum;j++){
                 System.out.print(floydArc[i][j]+" ");

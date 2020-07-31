@@ -5,7 +5,7 @@ package Queue;
  * @time 2020/07/22
  */
 public class QueueMain {
-    public static void main(String args[]){
+    public static void main(String[] args){
         QueueNode front=new QueueNode(0);
         Queue queue=new Queue(front);
 

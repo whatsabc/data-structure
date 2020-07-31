@@ -17,28 +17,8 @@ public class GraphEdge implements Comparable<GraphEdge>{
         this.lowCost = lowCost;
     }
 
-    public Integer getHead() {
-        return head;
-    }
-
-    public void setHead(Integer head) {
-        this.head = head;
-    }
-
-    public Integer getTail() {
-        return tail;
-    }
-
-    public void setTail(Integer tail) {
-        this.tail = tail;
-    }
-
     public Integer getLowCost() {
         return lowCost;
-    }
-
-    public void setLowCost(Integer lowCost) {
-        this.lowCost = lowCost;
     }
 
     /*
