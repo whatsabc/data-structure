@@ -7,13 +7,17 @@ package HashTable;
 public class HashTable {
 
     HashItem[] hashItems;
-    Integer size;
-    int HASHSIZE;
+    Integer initSize;//初始化表的大小（表的最大长度）
 
-    public HashTable(int size) {
-        this.HASHSIZE=size;
-        hashItems=new HashItem[HASHSIZE];
-        for(int i=0;i<HASHSIZE;i++) {
+    Integer size;//其中存储数据的表项大小
+
+    public HashTable(int initSize) {
+        this.initSize =initSize;
+        hashItems=new HashItem[initSize];
+        /*
+         * 必须有数组内类型的初始化，否则该数组内没有实际初始化的类型
+         */
+        for(int i = 0; i< initSize; i++) {
             hashItems[i]=new HashItem();
         }
         size=0;
@@ -25,10 +29,10 @@ public class HashTable {
      * @param value
      */
     public void put(Integer key,Integer value){
-        int addr=key%HASHSIZE;//求散列地址
+        int addr=key% initSize;//求散列地址
         //如果不为空，则冲突
         while(!hashItems[addr].key.equals(HashItem.NULL)){
-            addr=(addr+1)%HASHSIZE;//开放地址法的线性探测
+            addr=(addr+1)% initSize;//开放地址法的线性探测
         }
         //直到有空位后插入关键字
         hashItems[addr].set(key,value);
@@ -40,11 +44,11 @@ public class HashTable {
      * @return
      */
     public boolean contains(Integer key){
-        int addr=key%HASHSIZE;
+        int addr=key% initSize;
         while(!hashItems[addr].key.equals(key)){
-            addr=(addr+1)%HASHSIZE;
+            addr=(addr+1)% initSize;
             //在HashTable中找了一个循环仍然未找到
-            if(hashItems[addr].key.equals(HashItem.NULL)||addr==key%HASHSIZE){
+            if(hashItems[addr].key.equals(HashItem.NULL)||addr==key% initSize){
                 return false;
             }
         }
