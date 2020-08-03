@@ -9,7 +9,9 @@ public class HashMain {
         int initSize=10;
         HashTable hashTable=new HashTable(initSize);
         hashTable.put(1,100);
-        hashTable.put(2,100);
+        hashTable.put(11,100);
+        hashTable.put(11,101);
+        hashTable.put(1,101);
         hashTable.printHashTable();
         int searchKey=1;
         System.out.println("该HashTable中是否包含1："+hashTable.contains(searchKey));

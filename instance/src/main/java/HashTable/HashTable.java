@@ -28,15 +28,20 @@ public class HashTable {
      * @param key
      * @param value
      */
-    public void put(Integer key,Integer value){
+    public boolean put(Integer key,Integer value){
         int addr=key% initSize;//求散列地址
         //如果不为空，则冲突
         while(!hashItems[addr].key.equals(HashItem.NULL)){
+            if(hashItems[addr].key.equals(key)){
+                hashItems[addr].set(key,value);
+                return false;//说明key值完全一致，则更新
+            }
             addr=(addr+1)% initSize;//开放地址法的线性探测
         }
         //直到有空位后插入关键字
         hashItems[addr].set(key,value);
         size++;
+        return true;
     }
 
     /**
