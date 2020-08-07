@@ -1,10 +1,10 @@
-package Sort.StableSort;
+package Sort.StableSortExample;
 
 /**
  * @author Jianshu
  * @time 20200807
  */
-public class SimpleSort {
+public class Sort {
     public static void selectSort(Key[] keys){
         for(int i=0;i<keys.length-1;i++){
             int minIndex=i;

@@ -1,4 +1,4 @@
-package Sort.StableSort;
+package Sort.StableSortExample;
 
 /**
  * @author Jianshu
@@ -19,7 +19,7 @@ public class StableSortMain {
         keys[8]=new Key(4,7);
 
         Data data=new Data(keys);
-        SimpleSort.selectSort(data.keys);
-        SimpleSort.insertSort(data.keys);
+        Sort.selectSort(data.keys);
+        Sort.insertSort(data.keys);
     }
 }

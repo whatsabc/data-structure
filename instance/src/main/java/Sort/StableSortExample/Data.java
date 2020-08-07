@@ -1,4 +1,4 @@
-package Sort.StableSort;
+package Sort.StableSortExample;
 
 /**
  * @author Jianshu
