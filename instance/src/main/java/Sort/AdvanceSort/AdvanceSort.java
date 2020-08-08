@@ -95,4 +95,53 @@ public class AdvanceSort {
         a[aIndex]=a[bIndex];
         a[bIndex]=temp;
     }
+
+    /**
+     * 上浮操作
+     * @param a
+     * @param k
+     */
+    public static void swim(int[] a,int k){
+        while(k>1&&(k/2)<k){
+            exchange(a,(k/2),k);
+            k=k/2;
+        }
+    }
+
+    /**
+     * 下沉操作
+     * @param a
+     * @param k
+     * @param N
+     */
+    public static void sink(int[] a,int k,int N){
+        while(2*k<=N){
+            int j=2*k;
+            //如果左子结点小于右子结点，k指向右子结点
+            if(j<N&&a[j]<a[j+1])
+                j++;
+            //如果子节点大于父节点，子节点和父节点进行交换
+            if(a[j]>a[k]){
+                exchange(a,j,k);
+                k=j;//指向下一个节点
+            }
+            else
+                break;
+        }
+    }
+
+    /**
+     * 堆排序
+     * @param a
+     */
+    public static void headSort(int[] a){
+        int N=a.length-1;//该长度是数据长度，非数组长度
+        //下沉法建立最大堆（自底向上建立最大堆，从N/2开始，N/2指的是从第一个非叶子节点开始）
+        for(int k=N/2;k>=1;k--)
+            sink(a,k,N);
+        while(N>1){
+            exchange(a,1,N--);
+            sink(a,1,N);
+        }
+    }
 }
