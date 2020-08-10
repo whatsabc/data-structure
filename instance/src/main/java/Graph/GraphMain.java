@@ -4,7 +4,7 @@ package Graph;
  * @author Jianshu
  * @time 20200726
  */
-public class Main {
+public class GraphMain {
     public static void main(String[] args){
         int[] vexData=new int[]{0,1,2,3,4,5};
         /*
