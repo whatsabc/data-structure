@@ -75,7 +75,7 @@ public class ExpressionTree {
     }
 
     /**
-     * 递归进行中序遍历
+     * 递归进行中序遍历（表达式树的中序遍历就是常用的算数表达式）
      * @param root
      */
     public void midOrderTraverse(TreeNode root){

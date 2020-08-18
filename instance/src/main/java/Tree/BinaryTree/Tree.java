@@ -3,7 +3,7 @@ package Tree.BinaryTree;
 /**
  * @author Jianshu
  * @time 20200727
- * 最基本的二叉树
+ * 二叉树的基本操作，迭代和递归遍历，迭代和递归的序列化和反序列化
  */
 
 import java.util.*;
@@ -13,12 +13,16 @@ public class Tree {
     TreeNode root;
 
     /**
+     * 递归遍历算法
+     */
+
+    /**
      * 递归进行先序遍历
      * @param root
      */
     public void preOrderTraverse(TreeNode root){
         if(root!=null){
-            System.out.print("-->"+root.val);
+            System.out.print(root.val+" ");
             preOrderTraverse(root.left);
             preOrderTraverse(root.right);
         }
@@ -31,7 +35,7 @@ public class Tree {
     public void midOrderTraverse(TreeNode root){
         if(root!=null){
             midOrderTraverse(root.left);
-            System.out.print("-->"+root.val);
+            System.out.print(root.val+" ");
             midOrderTraverse(root.right);
         }
     }
@@ -44,11 +48,77 @@ public class Tree {
         if(root!=null){
             postOrderTraverse(root.left);
             postOrderTraverse(root.right);
-            System.out.print("-->"+root.val);
+            System.out.print(root.val+" ");
         }
     }
 
+    /**
+     * 迭代遍历算法
+     */
 
+    /**
+     * 迭代先序遍历
+     * @param root
+     */
+    public void preIterationTraverse(TreeNode root){
+        Stack<TreeNode> s=new Stack<TreeNode>();
+        s.push(root);
+
+        while(!s.isEmpty()) {
+            TreeNode node=s.pop();
+            System.out.print(node.val+" ");
+            if(node.right!=null) {
+                s.push(node.right);
+            }
+            if(node.left!=null) {
+                s.push(node.left);
+            }
+        }
+    }
+
+    /**
+     * 迭代中序遍历
+     * @param root
+     */
+    public void midIterationTraverse(TreeNode root){
+        Stack<TreeNode> s=new Stack<TreeNode>();
+
+        while(!s.isEmpty()||root!=null){
+            while(root!=null){
+                s.push(root);
+                root=root.left;
+            }
+            if(!s.isEmpty()){
+                TreeNode node=s.pop();
+                System.out.print(node.val+" ");
+                root=node.right;
+            }
+        }
+    }
+
+    /**
+     * 迭代后序遍历
+     * @param root
+     */
+    public void postIterationTraverse(TreeNode root){
+        List<Integer> list=new ArrayList<Integer>();
+        Stack<TreeNode> s=new Stack<TreeNode>();
+        s.push(root);
+
+        while(!s.isEmpty() ) {
+            TreeNode node=s.pop();
+            list.add(0,node.val);
+            if(node.left!=null) {
+                s.push(node.left);
+            }
+            if(node.right!=null) {
+                s.push(node.right);
+            }
+        }
+
+        for(Integer integer:list)
+            System.out.print(integer+" ");
+    }
     /**
      * 广度优先遍历算法
      */
@@ -62,7 +132,7 @@ public class Tree {
         deque.add(root);
         while(!deque.isEmpty()){
             TreeNode treeNode=deque.remove();
-            System.out.print("-->"+treeNode.val);
+            System.out.print(treeNode.val+" ");
             if(treeNode.left!=null){
                 deque.add(treeNode.left);
             }
