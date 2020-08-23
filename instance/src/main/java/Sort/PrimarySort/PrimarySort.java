@@ -54,7 +54,7 @@ public class PrimarySort {
         int N=arr.length;
         int j,target;
         int h=1;
-        //将数组分为3组，
+        //
         while(h<N/3){
             h=3*h+1;
         }

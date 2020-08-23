@@ -16,6 +16,7 @@ public class AdvanceSort {
     }
 
     public static void merger_sort(int[] a,int low,int high){
+        //分治的结束条件
         if(high<=low)
             return;
         int mid=low+(high-low)/2;
@@ -27,15 +28,16 @@ public class AdvanceSort {
     public static void merge(int[] a,int low,int mid,int high){
         int[] aux=new int[a.length];
         int i=low,j=mid+1;
-        //分配一个辅助数组
+        //分配一个辅助数组，用于将左右两边排好序的数组一起排序并放入
         for(int k=low;k<=high;k++)
             aux[k]=a[k];
 
         for(int k=low;k<=high;k++){
-            if(i>mid)
+            if(i>mid)//比较完毕，右边还有剩余
                 a[k]=aux[j++];
-            else if(j>high)
+            else if(j>high)//比较完毕，左边还有剩余
                 a[k]=aux[i++];
+            //根据左右两边大小有序放入辅助数组
             else if(aux[j]<aux[i])
                 a[k]=aux[j++];
             else
@@ -54,7 +56,7 @@ public class AdvanceSort {
     public static void quick_sort(int[] a,int low,int high){
         if(high<=low)
             return;
-        int j=partition(a,low,high);//
+        int j=partition(a,low,high);//进行切分
         quick_sort(a,low,j-1);//先排左半部分
         quick_sort(a,j+1,high);//再排右半部分
     }
@@ -70,23 +72,17 @@ public class AdvanceSort {
         int lowIndex=low;
         int keyNum=a[low];
         while(low<high){
-            //找到左边大于keyNum和右边小于keyNum的
+            //找到左边大于keyNum的并找到右边小于keyNum的
             while(low<high&&a[high]>=keyNum)
                 high--;
             //a[low]=a[high];
             while(low<high&&a[low]<=keyNum)
                 low++;
             //a[high]=a[low];
-            /*
-             * 交换这两个值
-             */
-            exchange(a,low,high);//
+            exchange(a,low,high);//将这两个值交换
         }
         //a[low]=keyNum;
-        /*
-         * 交换预存的本次循环最低索引和low值
-         */
-        exchange(a,lowIndex,low);//
+        exchange(a,lowIndex,low);//交换预存的本次循环最低索引和low值
         return high;
     }
 
