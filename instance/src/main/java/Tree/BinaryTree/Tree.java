@@ -214,16 +214,18 @@ public class Tree {
      * @param treeNode
      * @return
      */
-    public String SerializeDFS(TreeNode treeNode){
-        return Serialize_DFS(treeNode,"");
+    public StringBuilder SerializeDFS(TreeNode treeNode){
+        StringBuilder res=new StringBuilder();
+        Serialize_DFS(treeNode,res);
+        return res;
     }
 
-    public String Serialize_DFS(TreeNode treeNode,String res){
+    public StringBuilder Serialize_DFS(TreeNode treeNode,StringBuilder res){
         if(treeNode==null){
-            res+="null ";
+            res.append("null ");
         }
         else{
-            res+=treeNode.val+" ";
+            res.append(treeNode.val).append(" ");
             res=Serialize_DFS(treeNode.left,res);
             res=Serialize_DFS(treeNode.right,res);
         }
