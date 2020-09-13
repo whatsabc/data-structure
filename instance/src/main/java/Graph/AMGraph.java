@@ -64,6 +64,7 @@ public class AMGraph {
             isVisited[i]=false;
         }
 
+        //如果是非连通图的遍历，则需要每个节点都单独判断
         for(int v=0;v<vexNum;v++){
             if(!isVisited[v]){
                 DFS_AM(v);
